@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# PIP SECTION
+
+# pip cache configuration
+PIP_DOWNLOAD_CACHE=~/.pip-cache
+
+# VIRTUALENVWRAPPER SECTION
+export WORKON_HOME=$HOME/.entornos
+source /usr/local/bin/virtualenvwrapper.sh 
+
+
+# BASH COMPLETION SECTION
+
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+# GIT PROMPT SECTION
+function parse_git_dirty {
+  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+ }
+
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
+}
+
+# PROMPT SECTION
+# PS1='\[\e[36;1m\]\w\[\e[0m\] $(__git_ps1 "[\[\e[0;32m\]%s\[\e[0m\]\[\e[0;33m\]$(parse_git_dirty)\[\e[0m\]]")\n\$ \[\e[0m\]' 
+# export PS1='\[\e[0;1m\]┌─( \[\e[31;1m\]\u\[\e[0;1m\] ) - (  \[\e[36;1m\]\w\[\e[0;1m\] $(__git_ps1 "[\[\e[0;32m\]%s\[\e[0m\]\[\e[0;33m\]$(parse_git_dirty)\[\e[0m\]]") )\n└──┤ \[\e[0m\]'
+export PS1='\[\e[0;1m\]┌─( \[\e[31;1m\]\u\[\e[0;1m\] ) - ( \[\e[36;1m\]\w\[\e[0;1m\]$(__git_ps1 "[\[\e[0;32m\]%s\[\e[0m\]\[\e[0;33m\]$(parse_git_dirty)\[\e[0m\]]") )\n└──► \[\e[0m\]'
+
+# ALIAS SECTION
+
+alias ls='ls --color'
+

@@ -33,10 +33,17 @@ function into_venv {
     fi
 }
 
+function git_space {
+    if [ "$(parse_git_branch)" != "" ]; then
+        echo " "
+    fi
+}
+
+
 # PROMPT SECTION
 # PS1='\[\e[36;1m\]\w\[\e[0m\] $(__git_ps1 "[\[\e[0;32m\]%s\[\e[0m\]\[\e[0;33m\]$(parse_git_dirty)\[\e[0m\]]")\n\$ \[\e[0m\]' 
 # export PS1='\[\e[0;1m\]┌─( \[\e[31;1m\]\u\[\e[0;1m\] ) - (  \[\e[36;1m\]\w\[\e[0;1m\] $(__git_ps1 "[\[\e[0;32m\]%s\[\e[0m\]\[\e[0;33m\]$(parse_git_dirty)\[\e[0m\]]") )\n└──┤ \[\e[0m\]'
-export PS1='\[\e[0;1m\]$(into_venv)( \[\e[31;1m\]\u\[\e[0;1m\] ) - ( \[\e[36;1m\]\w\[\e[0;1m\]$(__git_ps1 "[\[\e[0;32m\]%s\[\e[0m\]\[\e[0;33m\]$(parse_git_dirty)\[\e[0m\]]") )\n└──► \[\e[0m\]'
+export PS1='\[\e[0;1m\]$(into_venv)( \[\e[31;1m\]\u\[\e[0;1m\] ) - ( \[\e[36;1m\]\w$(git_space)\[\e[0;1m\]$(__git_ps1 "[\[\e[0;32m\]%s\[\e[0m\]\[\e[0;33m\]$(parse_git_dirty)\[\e[0m\]]") )\n└──► \[\e[0m\]'
 
 # ALIAS SECTION
 

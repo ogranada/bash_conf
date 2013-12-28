@@ -47,5 +47,36 @@ export PS1='\[\e[0;1m\]$(into_venv)( \[\e[31;1m\]\u\[\e[0;1m\] ) - ( \[\e[36;1m\
 
 # ALIAS SECTION
 
-alias ls='ls --color'
+function addalias(){
+    alias $1="$2";
+    echo "alias $1=\"$2\"" >> ~/.aliases;
+    if [ "$3" != "--quiet" ]; then 
+        echo "done."
+    fi 
+}
+
+function rmalias(){
+    #cat ~/.aliases | grep -v "alias test" > ~/.aliases; # delete alias 
+    echo "`sed -e "s/alias $1/# alias $1/g" ~/.aliases`" > ~/.aliases;
+    unalias $1
+    echo "$1 removed from aliases";
+}
+
+function _rmalias(){
+    local cur opts
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    opts=$(alias | awk '{split($2,a,"=");print a[1]}')
+    COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+}
+
+complete -F _rmalias rmalias
+
+if [ -f ~/.aliases ]; then
+    source ~/.aliases
+else
+    touch ~/.aliases;
+    addalias ls ls\ --color --quiet;
+    addalias lsalias alias --quiet
+fi 
+
 

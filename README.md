@@ -45,5 +45,4 @@ TODO
 ====
 - ~~easy alias management~~
 - ~~*nix based terminals compatibility~~
-- easy intall
-- auto folder creation
+- easy install

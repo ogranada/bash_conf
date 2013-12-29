@@ -4,6 +4,7 @@ Bash Terminal configuration (optimized for debian based distros).
 
 # Features
 * Auto completion
+* Different bash configurations for Linux, OSX, Cygwin(Msys)
 * Easy alias management
 * Magic prompt (Works with git)
 * pip cache enabled
@@ -43,9 +44,6 @@ rmalias support completion
 TODO
 ====
 - ~~easy alias management~~
+- ~~*nix based terminals compatibility~~
 - easy intall
 - auto folder creation
-- *nix based OS compatibility
-
-
-

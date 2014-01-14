@@ -28,7 +28,7 @@ fi
 # PIP SECTION
 
 # pip cache configuration
-PIP_DOWNLOAD_CACHE=~/.pip-cache
+export PIP_DOWNLOAD_CACHE=~/.pip-cache
 
 # VIRTUALENVWRAPPER SECTION
 export WORKON_HOME=$HOME/.entornos

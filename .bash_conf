@@ -60,6 +60,15 @@ function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
 }
 
+if [ shell_is_osx ]; then 
+    function __git_ps1 {
+        tr="`git branch | awk '{print $2}'`"
+	if [ "$tr" != "" ]; then
+           echo "( $tr )"
+        fi
+    }
+fi
+
 function into_venv {
     if [ "$VIRTUAL_ENV" != "" ]; then
         echo "─◈─"

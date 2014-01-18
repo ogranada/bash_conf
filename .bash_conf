@@ -60,13 +60,17 @@ function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
 }
 
-if [ shell_is_osx ]; then 
+if [ shell_is_osx ]; then
     function __git_ps1 {
-        tr="`git branch | awk '{print $2}'`"
-	if [ "$tr" != "" ]; then
-           echo "( $tr )"
+        if [ -t ./.git ]; then 
+            tr="`git branch | awk '{print $2}'`"
+	    if [ "$tr" != "" ]; then
+                echo "( $tr )"
+            fi
         fi
-    }
+    };
+    export CLICOLOR=1;
+    export LSCOLORS=ExFxCxDxBxegedabagacad;
 fi
 
 function into_venv {

@@ -46,6 +46,14 @@ else
   fi
 fi
 
+if [ -f $HOME/.git-completion.bash ]; then
+    . $HOME/.git-completion.bash
+else
+    curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash 
+    . $HOME/.git-completion.bash
+fi
+
+
 # GIT PROMPT SECTION
 function parse_git_dirty {
   if $(shell_is_mingw ); then 
